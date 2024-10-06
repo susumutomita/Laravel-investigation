@@ -30,6 +30,11 @@ WORKDIR /var/www
 RUN chown -R www-data:www-data /var/www
 RUN chmod -R 755 /var/www
 
+# Composer installとLaravel初期設定
+RUN composer install \
+    && php artisan config:cache \
+    && php artisan route:cache
+
 # ポートを公開
 EXPOSE 80
 
